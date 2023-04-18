@@ -164,13 +164,13 @@ client.once('connected', async function () {
 client.connect();
 
 function getKeyIndex(key) {
-    
+    mongoNodes.sort((a, b) => parseInt(a.key) - parseInt(b.key));
     var index = 0;
     for (var i = 0; i < mongoNodes.length; i++) {
         if (mongoNodes[i].key > key) {
+            index = i;
             break;
         }
-        index = i;
     }
     return index;
 }
